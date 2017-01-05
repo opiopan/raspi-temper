@@ -1,0 +1,13 @@
+#!/bin/sh
+
+INTERVAL=60
+NOW=/run/temper.now
+
+update_temp() {
+    temper | sed -e 's/^.*,//' > $NOW
+}
+
+update_temp
+while sleep $INTERVAL;do
+    update_temp
+done
