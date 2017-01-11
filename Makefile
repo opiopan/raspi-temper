@@ -20,9 +20,11 @@ install: all
 	make -C temper install
 	install daemon/temperd $(DAEMON)
 	install daemon/temperd.service $(SERVICE)
+	tools/modify_rsyslog.conf
 	systemctl daemon-reload
 	systemctl enable temperd.service
 	systemctl restart temperd.service
+	systemctl restart syslog.service
 
 uninstall: all
 	make -C temper uninstall
